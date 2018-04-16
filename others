@@ -7,3 +7,30 @@ for (int i=0; i<100 ;i++)
 {
    speed[i]= 0;
 }
+//thread start event - start the game loop running
+public void start()
+{
+  gameloop = new Thread(this);
+  gameloop.start();
+}
+
+// thread run event(game loop)
+public void run()
+{
+   Thread t = Thread.currentThread();
+   while (t==gameloop)
+   { try{
+          gameUpdate();
+          Thread.sleep(20);
+         }
+     catch(InterruptedException e)
+     {
+         e.printStackTrace();
+     }
+     repaint();
+    }
+}
+public void stop()
+{
+    gameloop=null;
+}
